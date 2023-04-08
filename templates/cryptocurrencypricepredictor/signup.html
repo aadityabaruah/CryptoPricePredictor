@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style2.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="form-container">
+        <h3 class="form-title">Sign Up</h3>
+        <form action="/signup" method="post" class="form">
+        {% csrf_token %}
+            <label for="username" class="form-label">Username</label>
+            <input type="text" name="username" id="username" placeholder="Enter your username" required class="form-input">
+            <br>
+            <label for="firstname" class="form-label">First Name</label>
+            <input type="text" name="firstname" id="firstname" placeholder="Enter your first name" required class="form-input">
+            <br>
+            <label for="lastname" class="form-label">Last Name</label>
+            <input type="text" name="lastname" id="lastname" placeholder="Enter your last name" required class="form-input">
+            <br>
+            <label for="number" class="form-label">Phone Number</label>
+            <input type="tel" name="number" id="number" placeholder="Enter your phone number" pattern="[0-9]{10}" required class="form-input">
+            <br>
+            <label for="email" class="form-label">Email</label>
+            <input type="email" name="email" id="email" placeholder="Enter your email" required class="form-input">
+            <br>
+            <label for="password" class="form-label">Password</label>
+            <input type="password" name="password" id="password" placeholder="Enter your password" required class="form-input">
+            <br>
+            <label for="confirmpassword" class="form-label">Confirm Password</label>
+            <input type="password" name="confirmpassword" id="confirmpassword" placeholder="Confirm your password" required class="form-input">
+            <br>
+            <button type="submit" class="form-btn">Sign Up</button>
+        </form>
+    </div>
+</body>
+</html>

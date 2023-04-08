@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+  <h3>Welcome To The Login Page</h3>
+  <button type="submit"><a href="/signup">Signup</a></button>
+  <button type="submit"><a href="/login">Login</a></button>
+{#  <button type="submit"><a href="/logout">Logout</a></button>#}
+  <p>Here is some content about cryptocurrency and current prices:</p>
+  <ul>
+    <li>Bitcoin: $50,000</li>
+    <li>Ethereum: $2,500</li>
+    <li>Litecoin: $200</li>
+  </ul>
+</body>
+</html>
