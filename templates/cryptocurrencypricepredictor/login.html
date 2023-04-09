@@ -9,6 +9,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <strong>Message:</strong> {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+</button>
+
+    </div>
+    {% endfor %}
     <div class="form-container">
         <h3 class="form-title">Login</h3>
         <form action="/login" method="post" class="form">
@@ -21,6 +30,8 @@
 
             <button type="submit" class="form-btn">Login</button>
         </form>
+        <br>
+        <button onclick="window.location.href='{% url 'home' %}'" class="back-btn">Back to Home</button>
     </div>
 </body>
 </html>

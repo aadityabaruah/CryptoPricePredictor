@@ -59,3 +59,13 @@ button a {
     margin: 10px auto;
   }
 }
+
+/* align the buttons in the same row */
+.button-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.button-wrapper {
+  margin: auto;
+}

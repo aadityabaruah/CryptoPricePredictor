@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>SignUp Page</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'style2.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
@@ -23,7 +23,7 @@
             <input type="text" name="lastname" id="lastname" placeholder="Enter your last name" required class="form-input">
             <br>
             <label for="number" class="form-label">Phone Number</label>
-            <input type="tel" name="number" id="number" placeholder="Enter your phone number" pattern="[0-9]{10}" required class="form-input">
+            <input type="tel" name="number" id="number" placeholder="Enter your Indian phone number" pattern="[6789]\d{9}" required class="form-input">
             <br>
             <label for="email" class="form-label">Email</label>
             <input type="email" name="email" id="email" placeholder="Enter your email" required class="form-input">
@@ -36,6 +36,8 @@
             <br>
             <button type="submit" class="form-btn">Sign Up</button>
         </form>
+        <br>
+         <button onclick="window.location.href='{% url 'home' %}'" class="back-btn">Back to Home</button>
     </div>
 </body>
 </html>
