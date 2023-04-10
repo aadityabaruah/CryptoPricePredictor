@@ -1,42 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login Page</title>
   {% load static %}
-    <link rel="stylesheet" href="{% static 'style.css' %}">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
 </head>
+
 <body>
+  {% for message in messages %}
+  <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    <strong>Message:</strong> {{ message }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endfor %}
 
-    {% for message in messages %}
-    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-        <strong>Message:</strong> {{ message }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-  <span aria-hidden="true">&times;</span>
-</button>
+  <h3>Welcome to CryptoCurrency PricePredictor</h3>
 
+  <div class="button-container">
+    {% if user.is_authenticated %}
+<div class="button-wrapper">
+  <h3>Hello {{firstname}}!</h3>
+  <h4>You're successfully logged in.</h4>
+  <br>
+  <div class="button-wrapper">
+    <a href="/predict" class="button-link"><button class="btn btn-primary">Go To Prediction Page</button></a>
+    <a href="/logout" class="button-link"><button class="btn btn-secondary">Logout</button></a>
+  </div>
+</div>
+{% else %}
+
+    <div class="button-wrapper">
+  <a href="/signup" class="button-link"><button>SignUp</button></a>
+  <a href="/login" class="button-link"><button>Login</button></a>
+</div>
+
+    {% endif %}
+  </div>
+
+  <div class="content-container">
+    <div class="content-box">
+      <h4>Cryptocurrency</h4>
+      <p>Cryptocurrency is a digital or virtual currency that uses cryptography for security and operates independently of a central bank. Bitcoin, the first and most well-known cryptocurrency, was created in 2009. Today, there are thousands of cryptocurrencies with various levels of popularity and market capitalization.</p>
     </div>
-    {% endfor %}
-
-    <h3>Welcome to GeeksForGeeks!</h3>
-
-    <div class="button-container">
-        {% if user.is_authenticated %}
-        <div class="button-wrapper">
-            <h3>Hello {{firstname}}!</h3>
-            <h4>You're successfully logged in.</h4>
-            <br>
-            <button type="submit"><a href="/predict">Go To Prediction Page</a></button>
-            <br>
-            <button type="submit"><a href="/logout">Logout</a></button>
-        </div>
-        {% else %}
-        <div class="button-wrapper">
-            <button type="submit"><a href="/signup">SignUp</a></button>
-            <button type="submit"><a href="/login">Login</a></button>
-        </div>
-        {% endif %}
+    <div class="content-box">
+      <h4>Blockchain</h4>
+      <p>Blockchain is a distributed ledger technology that provides a secure and transparent way to record transactions. It is the underlying technology behind cryptocurrencies like Bitcoin. Blockchain allows multiple parties to have simultaneous access to a constantly updated digital ledger, which cannot be altered retroactively without the consensus of the network.</p>
     </div>
+  </div>
+
 </body>
+
 </html>

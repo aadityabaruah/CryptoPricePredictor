@@ -2,15 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    {% load static %}
-{#    <link rel="stylesheet" href="{% static 'style2.css' %}">#}
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <title>Predict Cryptocurrency Price</title>
 </head>
 <body>
-    <div class="form-container">
-        <button onclick="window.location.href='{% url 'home' %}'" class="back-btn">Back to Home</button>
-    </div>
+    <h1>Predict Cryptocurrency Price</h1>
+    <form method="POST" action="{% url 'predict' %}">
+        {% csrf_token %}
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date" required>
+        <br>
+        <label for="end_date">End Date:</label>
+        <input type="date" id="end_date" name="end_date" required>
+        <br>
+        <button type="submit">Predict</button>
+         <button onclick="window.location.href='{% url 'home' %}'" class="back-btn">Back to Home</button>
+    </form>
 </body>
 </html>

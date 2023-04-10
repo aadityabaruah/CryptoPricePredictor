@@ -1,71 +1,90 @@
-/* set background color and font family */
 body {
-  background-color: #f2f2f2;
   font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
 }
 
-/* center align the content */
 h3 {
   text-align: center;
+  padding: 20px;
+  font-size: 30px;
+  color: #333;
 }
 
-/* create a box around the buttons */
-button {
-  display: block;
-  border: none;
-  border-radius: 4px;
-  padding: 10px 20px;
-  margin: 10px;
-  box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
-  background-color: #3498db;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.button-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  white-space: nowrap;
 }
 
-/* change button color on hover */
-button:hover {
-  background-color: #2980b9;
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin: 20px;
 }
 
-/* add animation to the buttons */
-button {
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-/* style the links inside the buttons */
-button a {
+.button-wrapper a {
   text-decoration: none;
   color: white;
 }
 
-/* adjust the layout on small screens */
-@media screen and (max-width: 600px) {
-  button {
-    display: block;
-    margin: 10px auto;
-  }
+.button-wrapper a:hover {
+  color: white;
 }
 
-/* align the buttons in the same row */
-.button-container {
+.button-wrapper a button {
+  background-color: #6C63FF;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  padding: 10px 24px;
+  border-radius: 4px;
+}
+
+.button-wrapper a button:hover {
+  background-color: #524de7;
+}
+
+.alert {
+  margin: 10px;
+}
+
+.content-container {
   display: flex;
-  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 20px;
 }
 
-.button-wrapper {
-  margin: auto;
+.content-box {
+  width: 400px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px;
+}
+
+.content-box h4 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.content-box p {
+  font-size: 16px;
+  color: #666;
+  text-align: justify;
+  line-height: 1.5;
 }
