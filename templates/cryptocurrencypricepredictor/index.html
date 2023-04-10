@@ -1,3 +1,6 @@
+{% load static %}
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,6 +60,7 @@
       <p>Blockchain is a distributed ledger technology that provides a secure and transparent way to record transactions. It is the underlying technology behind cryptocurrencies like Bitcoin. Blockchain allows multiple parties to have simultaneous access to a constantly updated digital ledger, which cannot be altered retroactively without the consensus of the network.</p>
     </div>
   </div>
+{{ graph|safe }}
 
 </body>
 

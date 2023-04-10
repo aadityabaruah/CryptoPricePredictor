@@ -5,12 +5,40 @@ from django.contrib import messages
 from django.http import HttpResponse
 from datetime import datetime
 import yfinance as yf
-from sklearn.linear_model import LinearRegression
-from dateutil.relativedelta import relativedelta
+import plotly.graph_objs as go
+
+
+graph = 0
 
 
 def home(request):
-    return render(request, "cryptocurrencypricepredictor/index.html")
+    data = yf.download(tickers='BTC-USD', period='22h', interval='15m')
+    fig = go.Figure()
+    fig.add_trace(go.Candlestick(x=data.index,
+                                 open=data['Open'],
+                                 high=data['High'],
+                                 low=data['Low'],
+                                 close=data['Close'], name='market data'))
+    # Add titles
+    fig.update_layout(
+        title='Bitcoin live share price evolution',
+        yaxis_title='Bitcoin Price (kUS Dollars)')
+    # X-Axes
+    fig.update_xaxes(
+        rangeslider_visible=True,
+        rangeselector=dict(
+            buttons=list([
+                dict(count=15, label="15m", step="minute", stepmode="backward"),
+                dict(count=45, label="45m", step="minute", stepmode="backward"),
+                dict(count=1, label="HTD", step="hour", stepmode="todate"),
+                dict(count=6, label="6h", step="hour", stepmode="backward"),
+                dict(step="all")
+            ])
+        )
+    )
+
+    graph = fig.to_html(full_html=False)
+    return render(request, 'cryptocurrencypricepredictor/index.html', {'graph': graph})
 
 
 def signup(request):
@@ -71,43 +99,43 @@ def logout_user(request):
 
 
 def predict(request):
-    if request.method == 'POST':
-        return predict_result(request)
-    else:
-        return render(request, 'cryptocurrencypricepredictor/predict.html')
+    # if request.method == 'POST':
+    #     return predict_result(request)
+    # else:
+    return render(request, 'cryptocurrencypricepredictor/predict.html')
 
 
-def predict_result(request):
-    # Retrieve start and end dates from form input
-    start_date = datetime.strptime(request.POST.get('start_date'), '%Y-%m-%d')
-    end_date = datetime.strptime(request.POST.get('end_date'), '%Y-%m-%d')
-
-    # Retrieve historical price data for cryptocurrency using yfinance
-    ticker = yf.Ticker('BTC-USD')
-    history = ticker.history(period='12mo')
-
-    # Check if history is empty
-    if history.empty:
-        return render(request, 'cryptocurrencypricepredictor/error.html', {'message': 'No historical price data available for the specified date range.'})
-
-    # Extract features and target variable from historical price data
-    X = history[['Open', 'High', 'Low', 'Volume']]
-    y = history['Close']
-
-    # Train a linear regression model on the historical data
-    model = LinearRegression()
-    model.fit(X, y)
-
-    # Use the model to predict the future price of the cryptocurrency
-    latest_data = X.iloc[-1, :]
-    predicted_price = model.predict([latest_data])[0]
-
-    # Render the prediction.html template with the predicted price
-    context = {
-        'cryptocurrency': 'Bitcoin',
-        'start_date': start_date.strftime('%m/%d/%Y'),
-        'end_date': end_date.strftime('%m/%d/%Y'),
-        'predicted_price': round(predicted_price, 2),
-    }
-    return render(request, 'cryptocurrencypricepredictor/prediction.html', context)
-
+# def predict_result(request):
+#     # Retrieve start and end dates from form input
+#     start_date = datetime.strptime(request.POST.get('start_date'), '%Y-%m-%d')
+#     end_date = datetime.strptime(request.POST.get('end_date'), '%Y-%m-%d')
+#
+#     # Retrieve historical price data for cryptocurrency using yfinance
+#     ticker = yf.Ticker('BTC-USD')
+#     history = ticker.history(period='12mo')
+#
+#     # Check if history is empty
+#     if history.empty:
+#         return render(request, 'cryptocurrencypricepredictor/error.html',
+#                       {'message': 'No historical price data available for the specified date range.'})
+#
+#     # Extract features and target variable from historical price data
+#     X = history[['Open', 'High', 'Low', 'Volume']]
+#     y = history['Close']
+#
+#     # Train a linear regression model on the historical data
+#     model = LinearRegression()
+#     model.fit(X, y)
+#
+#     # Use the model to predict the future price of the cryptocurrency
+#     latest_data = X.iloc[-1, :]
+#     predicted_price = model.predict([latest_data])[0]
+#
+#     # Render the prediction.html template with the predicted price
+#     context = {
+#         'cryptocurrency': 'Bitcoin',
+#         'start_date': start_date.strftime('%m/%d/%Y'),
+#         'end_date': end_date.strftime('%m/%d/%Y'),
+#         'predicted_price': round(predicted_price, 2),
+#     }
+#     return render(request, 'cryptocurrencypricepredictor/prediction.html', context)
