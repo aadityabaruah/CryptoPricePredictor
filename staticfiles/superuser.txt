@@ -1,0 +1,3 @@
+username: cryptocurrencypricepredictor
+password: cryptocurrency
+email: cryptocurrencypricepredictor@gmail.com
