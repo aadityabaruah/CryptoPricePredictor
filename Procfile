@@ -1,1 +1,1 @@
-web: gunicorn cryptocurrencypricepredictor.wsgi --log-file -
+web: gunicorn PricePredictor.wsgi --log-file -
