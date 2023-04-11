@@ -2,8 +2,6 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from django.http import HttpResponse
-from datetime import datetime
 import yfinance as yf
 import plotly.graph_objs as go
 
@@ -99,43 +97,5 @@ def logout_user(request):
 
 
 def predict(request):
-    # if request.method == 'POST':
-    #     return predict_result(request)
-    # else:
-    return render(request, 'cryptocurrencypricepredictor/predict.html')
+   return render(request, 'cryptocurrencypricepredictor/predict.html')
 
-
-# def predict_result(request):
-#     # Retrieve start and end dates from form input
-#     start_date = datetime.strptime(request.POST.get('start_date'), '%Y-%m-%d')
-#     end_date = datetime.strptime(request.POST.get('end_date'), '%Y-%m-%d')
-#
-#     # Retrieve historical price data for cryptocurrency using yfinance
-#     ticker = yf.Ticker('BTC-USD')
-#     history = ticker.history(period='12mo')
-#
-#     # Check if history is empty
-#     if history.empty:
-#         return render(request, 'cryptocurrencypricepredictor/error.html',
-#                       {'message': 'No historical price data available for the specified date range.'})
-#
-#     # Extract features and target variable from historical price data
-#     X = history[['Open', 'High', 'Low', 'Volume']]
-#     y = history['Close']
-#
-#     # Train a linear regression model on the historical data
-#     model = LinearRegression()
-#     model.fit(X, y)
-#
-#     # Use the model to predict the future price of the cryptocurrency
-#     latest_data = X.iloc[-1, :]
-#     predicted_price = model.predict([latest_data])[0]
-#
-#     # Render the prediction.html template with the predicted price
-#     context = {
-#         'cryptocurrency': 'Bitcoin',
-#         'start_date': start_date.strftime('%m/%d/%Y'),
-#         'end_date': end_date.strftime('%m/%d/%Y'),
-#         'predicted_price': round(predicted_price, 2),
-#     }
-#     return render(request, 'cryptocurrencypricepredictor/prediction.html', context)
